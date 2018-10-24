@@ -4,6 +4,10 @@
   </head>
   <body>
     <pre><script>
+      document.write('navigator.userAgent: ' + navigator.userAgent + "\n");
+      document.write('navigator.appName: ' + navigator.appName + "\n");
+      document.write('navigator.appVersion: ' + navigator.appVersion + "\n");
+
       function getSupportedVideoTypes() {
         var video = document.createElement('video');
         var result = [];
@@ -12,20 +16,20 @@
         try {
           if (video.canPlayType) {
             var test = 'probably';
-            if (video.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '') === test) {
+            if (video.canPlayType('video/ogg; codecs="theora"') === test) {
               result.push('ogg');
             }
             // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
-            if (video.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '') === test) {
+            if (video.canPlayType('video/mp4; codecs="avc1.42E01E"') === test) {
               result.push('h264');
             }
-            if (video.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') === test) {
+            if (video.canPlayType('video/webm; codecs="vp8, vorbis"') === test) {
               result.push('webm');
             }
-            if (video.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '') === test) {
+            if (video.canPlayType('video/webm; codecs="vp9"') === test) {
               result.push('vp9');
             }
-            if (video.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '') === test) {
+            if (video.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"') === test) {
               result.push('hls');
             }
           }
@@ -33,29 +37,6 @@
 
         return result;
       }
-
-      // function getSupportedVideoTypes() {
-      //   var video = document.createElement('video');
-      //   var result = false;
-
-      //   // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
-      //   try {
-      //     result = !!video.canPlayType;
-
-      //     if (result) {
-      //       var test = 'probably';
-      //       result = {};
-      //       result.ogg = video.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '') === test;
-      //       // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
-      //       result.h264 = video.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '') === test;
-      //       result.webm = video.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') === test;
-      //       result.vp9 = video.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '') === test;
-      //       result.hls = video.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '') === test;
-      //     }
-      //   } catch (e) {}
-
-      //   return result;
-      // }
 
       // function supportsVideoType(type) {
       //   var video = document.createElement('video');
@@ -74,7 +55,7 @@
 
       var data = getSupportedVideoTypes();
       console.log(data);
-      document.write(JSON.stringify(data, null, 4));
+      document.write('Support Video Formats: [' + data.join(', ') + "]\n");
     </script></pre>
   </body>
 </html>
