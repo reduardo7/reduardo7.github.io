@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>Video Support</title>
+  </head>
+  <body>
+    <pre><script>
+      function getSupportedVideoTypes() {
+        var video = document.createElement('video');
+        var result = [];
+
+        // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
+        try {
+          if (video.canPlayType) {
+            var test = 'probably';
+            if (video.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '') === test) {
+              result.push('ogg');
+            }
+            // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
+            if (video.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '') === test) {
+              result.push('h264');
+            }
+            if (video.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') === test) {
+              result.push('webm');
+            }
+            if (video.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '') === test) {
+              result.push('vp9');
+            }
+            if (video.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '') === test) {
+              result.push('hls');
+            }
+          }
+        } catch (e) {}
+
+        return result;
+      }
+
+      // function getSupportedVideoTypes() {
+      //   var video = document.createElement('video');
+      //   var result = false;
+
+      //   // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
+      //   try {
+      //     result = !!video.canPlayType;
+
+      //     if (result) {
+      //       var test = 'probably';
+      //       result = {};
+      //       result.ogg = video.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '') === test;
+      //       // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
+      //       result.h264 = video.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '') === test;
+      //       result.webm = video.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') === test;
+      //       result.vp9 = video.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '') === test;
+      //       result.hls = video.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '') === test;
+      //     }
+      //   } catch (e) {}
+
+      //   return result;
+      // }
+
+      // function supportsVideoType(type) {
+      //   var video = document.createElement('video');
+
+      //   // Allow user to create shortcuts, i.e. just "webm"
+      //   var formats = {
+      //     ogg: 'video/ogg; codecs="theora"',
+      //     h264: 'video/mp4; codecs="avc1.42E01E"',
+      //     webm: 'video/webm; codecs="vp8, vorbis"',
+      //     vp9: 'video/webm; codecs="vp9"',
+      //     hls: 'application/x-mpegURL; codecs="avc1.42E01E"'
+      //   };
+
+      //   return video.canPlayType(formats[type] || type);
+      // }
+
+      var data = getSupportedVideoTypes();
+      console.log(data);
+      document.write(JSON.stringify(data, null, 4));
+    </script></pre>
+  </body>
+</html>
