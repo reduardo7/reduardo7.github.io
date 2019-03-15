@@ -1,0 +1,59 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <button type="button" onclick="a.play()">play</button>
+    <button type="button" onclick="a.playDelay()">playDelay</button>
+    <button type="button" onclick="a.stop()">stop</button>
+    <script>
+      function audio() {
+        const AUDIO_SILENCE = 'https://cdn.conversifi.com/src/assets/silence_ring.mp3';
+        const AUDIO_PHONE = 'https://cdn.conversifi.com/src/assets/phone_ring.mp3';
+
+        const audioRing = new Audio(AUDIO_SILENCE);
+        let audioRingPromise = null;
+
+        audioRing.addEventListener('ended', function () { // Simulate loop. This works in every browser.
+          try {
+            audioRingPromise = audioRing.play();
+          } catch (err) {
+            console.info('WARN: audio.ended > Play ring err', err);
+          }
+        }, false);
+
+        const audioStop = () => {
+          try {
+            audioRingPromise = null;
+            audioRing.pause();
+          } catch (err) {
+            console.info('WARN: audio.pause', err);
+          }
+        };
+
+        this.play = () => {
+          try {
+            audioRing.src = AUDIO_PHONE;
+            audioRingPromise = audioRing.play();
+          } catch (err) {
+            console.info('WARN: audio.play', err);
+          }
+        };
+
+        this.playDelay = () => {
+          setTimeout(this.play, 5000);
+        };
+
+        this.stop = () => {
+          if (audioRingPromise) {
+            audioRingPromise
+              .then(audioStop)
+              .catch(err => console.info('WARN: audio.stop', err));
+          } else {
+            audioStop();
+          }
+        };
+      }
+      var a = new audio();
+    </script>
+  </body>
+</html>
