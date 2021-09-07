@@ -9,6 +9,10 @@
 
       pass = prompt('Password?');
 
+      if (!pass) {
+        throw new Error('No password!');
+      }
+
       if (
         this.decrypt('U2FsdGVkX1/kvSQuxlThWchlyGSMOwi8JrgTqp8U8WQ=', pass)
         ===
@@ -17,20 +21,29 @@
         return pass;
       }
 
-      alert('INVALID PASSWORD!');
       throw new Error('INVALID PASSWORD');
     },
 
     encrypt: function (clear, pass = null) {
-      var cipher = CryptoJS.AES.encrypt(clear, crypt.secret(pass));
-      cipher = cipher.toString();
-      return cipher;
+      try {
+        var cipher = CryptoJS.AES.encrypt(clear, crypt.secret(pass));
+        cipher = cipher.toString();
+        return cipher;
+      } catch (err) {
+        console.error(err);
+        alert(err.message);
+      }
     },
 
     decrypt: function (cipher, pass = null) {
-      var decipher = CryptoJS.AES.decrypt(cipher, crypt.secret(pass));
-      decipher = decipher.toString(CryptoJS.enc.Utf8);
-      return decipher;
+      try {
+        var decipher = CryptoJS.AES.decrypt(cipher, crypt.secret(pass));
+        decipher = decipher.toString(CryptoJS.enc.Utf8);
+        return decipher;
+      } catch (err) {
+        console.error(err);
+        alert(err.message);
+      }
     }
   };
 
