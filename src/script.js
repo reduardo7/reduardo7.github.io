@@ -10,9 +10,9 @@
       pass = prompt('Password?');
 
       if (
-        this.decrypt(this.encrypt(pass, pass), pass)
+        this.decrypt('U2FsdGVkX1/kvSQuxlThWchlyGSMOwi8JrgTqp8U8WQ=', pass)
         ===
-        this.decrypt(this.encrypt(pass, pass), pass)
+        this.decrypt(this.encrypt('test-string-key', pass), pass)
       ) {
         return pass;
       }
