@@ -3,7 +3,11 @@
 (function (global) {
   var crypt = {
     secret: function (pass = null) {
-      if (!pass) pass = prompt('Password?');
+      if (pass) {
+        return pass;
+      }
+
+      pass = prompt('Password?');
 
       if (
         this.decrypt(this.encrypt(pass, pass), pass)
