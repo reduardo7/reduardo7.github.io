@@ -2,12 +2,18 @@
 
 BASE_PERIOD="${1:-${BASE_PERIOD}}"
 COMPARE_PERIOD="${2:-${COMPARE_PERIOD}}"
+MONTHS_IN_PERIOD=${3:-${MONTHS_IN_PERIOD:-1}}
 
 usage() {
   echo "Usage:"
   echo "  $ $0 <BASE_PERIOD: YYYY-MM> <COMPARE_PERIOD: YYYY-MM>"
+  echo "  $ $0 <BASE_PERIOD: YYYY-MM> <COMPARE_PERIOD: YYYY-MM> <MONTHS_IN_PERIOD: 1>"
   echo "or:"
   echo "  $ BASE_PERIOD=<YYYY-MM> COMPARE_PERIOD=<YYYY-MM> $0"
+  echo "  $ BASE_PERIOD=<YYYY-MM> COMPARE_PERIOD=<YYYY-MM> MONTHS_IN_PERIOD=<1> $0"
+  echo "or:"
+  echo "  $ export BASE_PERIOD=2025-03 COMPARE_PERIOD=2025-05 ; curl -s https://reduardo7.github.io/git-productivity.sh | bash"
+  echo "  $ export BASE_PERIOD=2025-03 COMPARE_PERIOD=2025-05 MONTHS_IN_PERIOD=1 ; curl -s https://reduardo7.github.io/git-productivity.sh | bash"
   exit 1
 }
 
@@ -15,24 +21,24 @@ usage() {
 validate_date_format() {
   local date_str=$1
   local param_name=$2
-  
+
   if [[ -z "$date_str" ]]; then
     echo "Error: $param_name is empty"
     return 1
   fi
-  
+
   if [[ ! "$date_str" =~ ^[0-9]{4}-[0-9]{2}$ ]]; then
     echo "Error: $param_name '$date_str' does not match format YYYY-MM"
     return 1
   fi
-  
+
   # Validate month range (01-12)
   local month=$(echo "$date_str" | cut -d'-' -f2)
   if [[ $month -lt 1 || $month -gt 12 ]]; then
     echo "Error: $param_name '$date_str' has invalid month (must be 01-12)"
     return 1
   fi
-  
+
   return 0
 }
 
@@ -52,7 +58,7 @@ echo "Working on: $(pwd)"
 get_lines_changed() {
   local YEAR_MONTH=$1
   local START="${YEAR_MONTH}-01"
-  local END=$(date -v+1m -v-1d -jf "%Y-%m-%d" "$START" +%Y-%m-%d)
+  local END=$(date -v+${MONTHS_IN_PERIOD}m -v-1d -jf "%Y-%m-%d" "$START" +%Y-%m-%d)
 
   git log \
     --author="$(git config user.name)" \
@@ -74,4 +80,3 @@ fi
 echo "Lines changed in $BASE_PERIOD: $START_LINES"
 echo "Lines changed in $COMPARE_PERIOD: $END_LINES"
 echo "Efficiency change: $EFFICIENCY%"
-
