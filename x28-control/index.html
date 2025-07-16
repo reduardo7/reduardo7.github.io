@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-28 Control - Control de Alarmas Inteligente</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <meta name="description"
+    content="Aplicación móvil para el control inteligente de sistemas de alarmas X-28 Control. Monitoreo remoto y gestión de seguridad desde tu smartphone.">
+  <meta name="keywords" content="alarmas, seguridad, control remoto, X-28 Control, sistema de alarmas, monitoreo">
+  <meta name="author" content="X-28 Control">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://x28-control.com/">
+  <meta property="og:title" content="X-28 Control - Control de Alarmas Inteligente">
+  <meta property="og:description"
+    content="Aplicación móvil para el control inteligente de sistemas de alarmas X-28 Control. Monitoreo remoto y gestión de seguridad desde tu smartphone.">
+  <meta property="og:image" content="icon.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://x28-control.com/">
+  <meta property="twitter:title" content="X-28 Control - Control de Alarmas Inteligente">
+  <meta property="twitter:description"
+    content="Aplicación móvil para el control inteligente de sistemas de alarmas X-28 Control. Monitoreo remoto y gestión de seguridad desde tu smartphone.">
+  <meta property="twitter:image" content="icon.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .app-icon:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      opacity: 0.8;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .playstore-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      color: #1e3c72;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      margin-top: 20px;
+    }
+
+    .playstore-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .playstore-icon {
+      width: 200px;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .playstore-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .install-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 20px 0;
+      color: #ffd700;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .playstore-icon {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .app-icon {
+        width: 100px;
+        height: 100px;
+      }
+
+      .playstore-icon {
+        width: 120px;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .feature {
+      animation: fadeInUp 0.8s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .feature:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .feature:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .feature:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="icon.png" alt="X-28 Control" class="app-icon">
+
+    <h1>X-28 Control</h1>
+    <p class="subtitle">Control Inteligente de Sistemas de Alarmas</p>
+
+    <p class="description">
+      Controla tu sistema de alarmas mediante SMS desde cualquier lugar.
+      La aplicación se comunica con tu alarma a través de mensajes de texto,
+      requiriendo que tu sistema disponga de una tarjeta SIM configurada
+      y interfaz SMS para el control remoto.
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>Control Remoto</h3>
+        <p>Activa y desactiva tu alarma mediante SMS desde tu smartphone</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔔</div>
+        <h3>Notificaciones SMS</h3>
+        <p>Recibe alertas de eventos de seguridad en tiempo real</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚙️</div>
+        <h3>Configura tu alarma</h3>
+        <p>Personaliza y ajusta los parámetros de tu sistema</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏠</div>
+        <h3>Gestiona múltiples alarmas</h3>
+        <p>Controla varios sistemas con tarjetas SIM desde una sola aplicación</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📞</div>
+        <h3>Configura los teléfonos</h3>
+        <p>Establece números de contacto para recibir notificaciones SMS</p>
+      </div>
+    </div>
+
+    <p class="install-text">¡Instala ahora desde PlayStore!</p>
+
+    <a href="https://play.google.com/store/apps/details?id=ar.com.eduardocuomo.x28" target="_blank"
+      class="playstore-button">
+      <img src="playstore.png" alt="Disponible en Google Play" class="playstore-icon">
+    </a>
+
+    <div class="footer">
+      <p>X-28 Control</p>
+      <p style="margin-top: 10px;">
+        <a href="privacy.html" style="color: #ffd700; text-decoration: none; font-size: 0.8rem;">Política de
+          Privacidad</a>
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>
