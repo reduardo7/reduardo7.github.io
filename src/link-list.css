@@ -1,0 +1,300 @@
+/**
+ * Link list — componente reutilizable (tema oscuro)
+ * -----------------------------------------------------------------------------
+ * Estructura:
+ *
+ *   <ul class="link-list">
+ *     <li class="link-list__item">
+ *       <a class="link-list__link" href="..." style="--link-list-accent: #3ee6ff">
+ *         <span class="link-list__icon" aria-hidden="true">…SVG…</span>
+ *         <span class="link-list__content">
+ *           <span class="link-list__title">Título</span>
+ *           <span class="link-list__meta">/ruta</span>
+ *         </span>
+ *         <span class="link-list__index" aria-hidden="true"></span>
+ *         <span class="link-list__arrow" aria-hidden="true">…SVG…</span>
+ *       </a>
+ *     </li>
+ *   </ul>
+ *
+ * Personalización por item:
+ *   --link-list-accent  Color de acento (por defecto cian).
+ *   --i                 Índice de entrada para el stagger (0, 1, 2…).
+ *
+ * La numeración (01, 02…) es automática mediante contadores CSS.
+ * El componente no depende de JavaScript ni de los estilos de la página.
+ */
+
+.link-list {
+  --link-list-gap: 10px;
+  --link-list-radius: 15px;
+  --link-list-border: rgba(255, 255, 255, 0.08);
+  --link-list-muted: #8e94ad;
+  --link-list-text: #e9ecf8;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--link-list-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: link-list;
+}
+
+.link-list__item {
+  counter-increment: link-list;
+  min-width: 0;
+}
+
+.link-list__link {
+  --link-list-accent: #3ee6ff;
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 14px);
+
+  padding: clamp(13px, 1.7vw, 17px) clamp(14px, 2vw, 19px);
+  overflow: hidden;
+
+  border: 1px solid var(--link-list-border);
+  border-radius: var(--link-list-radius);
+  background: rgba(255, 255, 255, 0.024);
+  color: var(--link-list-text);
+  text-decoration: none;
+
+  opacity: 0;
+  animation: link-list-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.07s);
+  transition:
+    transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    background-color 0.32s ease;
+}
+
+/* Barra de acento lateral */
+.link-list__link::before {
+  content: '';
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--link-list-accent);
+  box-shadow: 0 0 14px var(--link-list-accent);
+  opacity: 0.45;
+  transition:
+    top 0.32s ease,
+    bottom 0.32s ease,
+    opacity 0.32s ease;
+}
+
+/* Lavado de color al interactuar */
+.link-list__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--link-list-accent) 15%, transparent),
+    transparent 58%
+  );
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+
+.link-list__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: clamp(38px, 4.4vw, 42px);
+  height: clamp(38px, 4.4vw, 42px);
+  border: 1px solid color-mix(in srgb, var(--link-list-accent) 28%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--link-list-accent) 12%, transparent);
+  color: var(--link-list-accent);
+  box-shadow: inset 0 0 18px color-mix(in srgb, var(--link-list-accent) 10%, transparent);
+  transition:
+    background-color 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+.link-list__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.link-list__icon svg.is-filled {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.link-list__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.link-list__title {
+  overflow: hidden;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-list__meta {
+  overflow: hidden;
+  color: var(--link-list-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.32s ease;
+}
+
+.link-list__index {
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  transition: color 0.32s ease;
+}
+
+.link-list__index::before {
+  content: counter(link-list, decimal-leading-zero);
+}
+
+.link-list__arrow {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: var(--link-list-muted);
+  transition:
+    transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 0.32s ease;
+}
+
+.link-list__arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.link-list__link:focus-visible {
+  outline: 2px solid var(--link-list-accent);
+  outline-offset: 3px;
+}
+
+.link-list__link:active {
+  transform: scale(0.995);
+}
+
+@media (hover: hover) {
+  .link-list__link:hover {
+    transform: translateX(4px);
+    border-color: color-mix(in srgb, var(--link-list-accent) 46%, transparent);
+    background-color: rgba(255, 255, 255, 0.035);
+    box-shadow:
+      0 18px 40px -22px color-mix(in srgb, var(--link-list-accent) 55%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--link-list-accent) 20%, transparent);
+  }
+
+  .link-list__link:hover::after {
+    opacity: 1;
+  }
+
+  .link-list__link:hover::before {
+    top: 10%;
+    bottom: 10%;
+    opacity: 1;
+  }
+
+  .link-list__link:hover .link-list__icon {
+    background: color-mix(in srgb, var(--link-list-accent) 18%, transparent);
+    box-shadow:
+      inset 0 0 18px color-mix(in srgb, var(--link-list-accent) 14%, transparent),
+      0 0 18px color-mix(in srgb, var(--link-list-accent) 32%, transparent);
+  }
+
+  .link-list__link:hover .link-list__meta,
+  .link-list__link:hover .link-list__index {
+    color: color-mix(in srgb, var(--link-list-accent) 78%, #ffffff 22%);
+  }
+
+  .link-list__link:hover .link-list__arrow {
+    color: var(--link-list-accent);
+    transform: translateX(4px);
+  }
+}
+
+@keyframes link-list-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .link-list {
+    --link-list-gap: 8px;
+    --link-list-radius: 14px;
+  }
+
+  .link-list__link {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 11px;
+    padding: 13px;
+  }
+
+  .link-list__index {
+    display: none;
+  }
+
+  .link-list__meta {
+    font-size: 0.66rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-list__link {
+    opacity: 1;
+    animation: none;
+    transition-duration: 0.01ms;
+  }
+
+  .link-list__link::before,
+  .link-list__link::after,
+  .link-list__icon,
+  .link-list__meta,
+  .link-list__index,
+  .link-list__arrow {
+    transition-duration: 0.01ms;
+  }
+}

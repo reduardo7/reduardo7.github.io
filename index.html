@@ -1,34 +1,122 @@
-<html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Eduardo Daniel Cuomo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05060a" />
+    <meta name="description" content="Proyectos y accesos personales de Eduardo Daniel Cuomo." />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="src/link-list.css" />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
 
-<head>
-  <title>Eduardo Daniel Cuomo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="aurora aurora--cyan"></div>
+      <div class="aurora aurora--violet"></div>
+      <div class="aurora aurora--mint"></div>
+      <div class="grid"></div>
+      <div class="vignette"></div>
+    </div>
 
-<body>
-  <h1>Eduardo Daniel Cuomo</h1>
+    <main class="shell">
+      <header class="hero">
+        <p class="kicker">
+          <span class="kicker__dot"></span>
+          Index · System online
+        </p>
 
-  <hr />
+        <h1 class="title">Eduardo Daniel Cuomo</h1>
 
-  <p>
-  <ul>
-    <li>
-      <a href="/x28-control">X28 Control</a>
-    </li>
-    <li>
-      <a href="https://github.com/reduardo7">https://github.com/reduardo7</a>
-    </li>
-    <li>
-      <a href="javascript:openDrive()">Drive</a>
-    </li>
-    <li>
-      <a href="/program-locker">Program Locker</a>
-    </li>
-  </ul>
-  </p>
+        <p class="subtitle">Proyectos y accesos personales.</p>
+      </header>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-  <script src="/src/script.js"></script>
-</body>
+      <nav class="links" aria-label="Enlaces">
+        <ul class="link-list">
+          <li class="link-list__item">
+            <a class="link-list__link" href="/x28-control" style="--link-list-accent: #3ee6ff; --i: 0">
+              <span class="link-list__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 7h9M19 7h1M4 12h3M13 12h7M4 17h11M21 17h-1" />
+                  <circle cx="16" cy="7" r="2.4" />
+                  <circle cx="10" cy="12" r="2.4" />
+                  <circle cx="18" cy="17" r="2.4" />
+                </svg>
+              </span>
+              <span class="link-list__content">
+                <span class="link-list__title">X28 Control</span>
+                <span class="link-list__meta">/x28-control</span>
+              </span>
+              <span class="link-list__index" aria-hidden="true"></span>
+              <span class="link-list__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+          </li>
 
+          <li class="link-list__item">
+            <a
+              class="link-list__link"
+              href="https://github.com/reduardo7"
+              style="--link-list-accent: #9d7bff; --i: 1"
+            >
+              <span class="link-list__icon" aria-hidden="true">
+                <svg class="is-filled" viewBox="0 0 16 16">
+                  <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                  />
+                </svg>
+              </span>
+              <span class="link-list__content">
+                <span class="link-list__title">GitHub</span>
+                <span class="link-list__meta">github.com/reduardo7</span>
+              </span>
+              <span class="link-list__index" aria-hidden="true"></span>
+              <span class="link-list__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+          </li>
+
+          <li class="link-list__item">
+            <a
+              class="link-list__link"
+              href="javascript:openDrive()"
+              style="--link-list-accent: #6ef2b4; --i: 2"
+            >
+              <span class="link-list__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7.5 18.5h9a3.75 3.75 0 0 0 .5-7.47 6 6 0 0 0-11.63-1.4A4.13 4.13 0 0 0 7.5 18.5Z" />
+                  <path d="M12 11.5v5M9.6 14l2.4-2.5 2.4 2.5" />
+                </svg>
+              </span>
+              <span class="link-list__content">
+                <span class="link-list__title">Drive</span>
+                <span class="link-list__meta">/drive · acceso cifrado</span>
+              </span>
+              <span class="link-list__index" aria-hidden="true"></span>
+              <span class="link-list__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <footer class="footer">
+        <span>© 2026 · reduardo7</span>
+        <span class="status">Online</span>
+      </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="/src/script.js"></script>
+  </body>
 </html>
