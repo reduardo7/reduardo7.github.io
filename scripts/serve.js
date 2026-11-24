@@ -3,12 +3,15 @@
 
 // Servidor estático mínimo, sin dependencias, para probar el sitio en local.
 // Uso: npm start   (o PORT=3000 npm start)
+//      ROOT=tuki-tok PORT=3003 node scripts/serve.js   (sirve sólo ese subdirectorio)
 
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = process.env.ROOT
+  ? path.resolve(__dirname, '..', process.env.ROOT)
+  : path.resolve(__dirname, '..');
 const PORT = Number(process.env.PORT) || 8080;
 const HOST = process.env.HOST || '127.0.0.1';
 

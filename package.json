@@ -6,7 +6,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "node scripts/serve.js",
-    "dev": "node scripts/serve.js"
+    "dev": "node scripts/serve.js",
+    "start:tuki-tok": "ROOT=tuki-tok PORT=${PORT:-3003} node scripts/serve.js",
+    "dev:tuki-tok": "ROOT=tuki-tok PORT=${PORT:-3003} node scripts/serve.js"
   },
   "engines": {
     "node": ">=18"
