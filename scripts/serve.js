@@ -3,7 +3,7 @@
 
 // Servidor estático mínimo, sin dependencias, para probar el sitio en local.
 // Uso: npm start   (o PORT=3000 npm start)
-//      ROOT=tuki-tok PORT=3003 node scripts/serve.js   (sirve sólo ese subdirectorio)
+//      ROOT=frusita PORT=3003 node scripts/serve.js   (sirve sólo ese subdirectorio)
 
 const http = require('node:http');
 const fs = require('node:fs');

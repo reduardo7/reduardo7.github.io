@@ -45,19 +45,19 @@ Listado vertical reutilizable, sin JavaScript. Los estilos del componente viven 
 La numeración (`01`, `02`, …) es automática. Cada item admite `--link-list-accent`
 (color de acento) y `--i` (orden para la animación de entrada).
 
-## Tuki-Tok
+## Frusita
 
-La aplicación Tuki-Tok tiene su propio sitio dentro de `tuki-tok/`: el home y la
+La aplicación Frusita tiene su propio sitio dentro de `frusita/`: el home y la
 política de privacidad declarada en Google Play.
 
 ```bash
-npm run start:tuki-tok
+npm run start:frusita
 ```
 
 Lo sirve en <http://127.0.0.1:3003/> (el home; la política queda en
 <http://127.0.0.1:3003/privacy.html>). El puerto se puede cambiar con
-`PORT=3004 npm run start:tuki-tok`.
+`PORT=3004 npm run start:frusita`.
 
-- <https://reduardo7.github.io/tuki-tok/>
-- <https://reduardo7.github.io/tuki-tok/privacy.html>
+- <https://reduardo7.github.io/frusita/>
+- <https://reduardo7.github.io/frusita/privacy.html>
 

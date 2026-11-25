@@ -8,7 +8,7 @@ GitHub Pages serves the repo root as-is.
 
 - `npm start` (alias `npm run dev`) → `node scripts/serve.js`, <http://127.0.0.1:8080/>.
   Override with `PORT=3000 npm start`, `HOST=0.0.0.0`.
-- `npm run start:tuki-tok` (alias `npm run dev:tuki-tok`) serves only `tuki-tok/`
+- `npm run start:frusita` (alias `npm run dev:frusita`) serves only `frusita/`
   as the site root at <http://127.0.0.1:3003/>; use it to preview the app site and
   its privacy policy without the parent index.
 - There is no lint/format/test script. `.prettierrc.js` + `.editorconfig` define the style
@@ -30,7 +30,7 @@ GitHub Pages serves the repo root as-is.
 - `x28-control/` and `akoko-privacy-policy.html` are legacy self-contained pages with inline
   CSS and a different look. Leave their style alone unless asked, and do not move or rename
   them: they are live URLs linked from Play Store listings.
-- `tuki-tok/` is the Tuki-Tok app site: a home plus `privacy.html`, the URL declared in its
+- `frusita/` is the Frusita app site: a home plus `privacy.html`, the URL declared in its
   Google Play listing. It is a self-contained sub-site (own `styles.css` and `assets/`, brand
   palette from the app) linked from the root index; pages use relative URLs only.
 - `git-productivity.sh` must stay at the repo root — it is distributed as
